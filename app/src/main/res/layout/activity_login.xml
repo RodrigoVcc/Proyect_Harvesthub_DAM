@@ -12,7 +12,9 @@
         android:layout_width="220dp"
         android:layout_height="156dp"
         android:layout_marginStart="100dp"
-        android:layout_marginTop="55dp"
+        android:layout_marginTop="45dp"
+        android:layout_marginEnd="91dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/harvesthub_logov2" />
@@ -23,9 +25,13 @@
         android:layout_height="56dp"
         android:layout_marginStart="60dp"
         android:layout_marginTop="50dp"
+        android:layout_marginEnd="77dp"
+        android:layout_marginBottom="9dp"
         android:ems="10"
-        android:inputType="text"
         android:hint="Nombre Usuario"
+        android:inputType="text"
+        app:layout_constraintBottom_toTopOf="@+id/txtvPassword"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
@@ -35,9 +41,13 @@
         android:layout_height="56dp"
         android:layout_marginStart="60dp"
         android:layout_marginTop="30dp"
+        android:layout_marginEnd="77dp"
+        android:layout_marginBottom="17dp"
         android:ems="10"
-        android:inputType="textPassword"
         android:hint="Ingrese contraseña"
+        android:inputType="textPassword"
+        app:layout_constraintBottom_toTopOf="@+id/chip"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editNombre_usuario" />
 
@@ -46,20 +56,28 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="60dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="303dp"
         android:layout_marginBottom="1dp"
         android:text="Usuario"
         app:layout_constraintBottom_toTopOf="@+id/editNombre_usuario"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
     <TextView
         android:id="@+id/txtvPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="60dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="281dp"
         android:layout_marginBottom="1dp"
         android:text="contraseña"
         app:layout_constraintBottom_toTopOf="@+id/editPassword"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editNombre_usuario" />
 
     <Button
         android:id="@+id/btnRecuperarPass"
@@ -67,10 +85,12 @@
         android:layout_height="56dp"
         android:layout_marginStart="68dp"
         android:layout_marginTop="75dp"
+        android:layout_marginEnd="79dp"
         android:background="@android:color/transparent"
         android:text="¿Has olvidado tu contraseña?"
         android:textColor="@color/black"
         android:textSize="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editPassword" />
 
@@ -80,9 +100,13 @@
         android:layout_height="60dp"
         android:layout_marginStart="68dp"
         android:layout_marginTop="14dp"
+        android:layout_marginEnd="68dp"
+        android:layout_marginBottom="24dp"
         android:backgroundTint="@color/verde_claro"
         android:text="Inciar Sesion"
         android:textColor="@color/black"
+        app:layout_constraintBottom_toTopOf="@+id/btnSalie"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnRecuperarPass" />
 
@@ -90,8 +114,10 @@
         android:id="@+id/chip"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
+        android:layout_marginStart="85dp"
         android:layout_marginTop="17dp"
+        android:layout_marginEnd="19dp"
+        app:layout_constraintEnd_toStartOf="@+id/txtvRecordarme"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editPassword" />
 
@@ -101,9 +127,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="19dp"
         android:layout_marginTop="29dp"
+        android:layout_marginEnd="183dp"
         android:text="Recuerdame"
         android:textColor="@color/black"
         android:textSize="18dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/chip"
         app:layout_constraintTop_toBottomOf="@+id/editPassword" />
 
@@ -113,10 +141,14 @@
         android:layout_height="56dp"
         android:layout_marginStart="45dp"
         android:layout_marginTop="25dp"
+        android:layout_marginEnd="53dp"
+        android:layout_marginBottom="38dp"
         android:background="@android:color/transparent"
         android:text="Registrarse"
         android:textColor="@color/black"
         android:textSize="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnSalie"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnlogin" />
 
@@ -124,12 +156,16 @@
         android:id="@+id/btnSalie"
         android:layout_width="81dp"
         android:layout_height="56dp"
-        android:layout_marginStart="53dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="80dp"
+        android:layout_marginBottom="50dp"
         android:background="@android:color/transparent"
         android:text="Salir"
         android:textColor="@color/black"
         android:textSize="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btnRegistrar"
         app:layout_constraintTop_toBottomOf="@+id/btnlogin" />
 

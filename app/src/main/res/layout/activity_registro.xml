@@ -11,6 +11,8 @@
         android:layout_height="156dp"
         android:layout_marginStart="100dp"
         android:layout_marginTop="50dp"
+        android:layout_marginEnd="91dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/harvesthub_logov2" />
@@ -21,9 +23,11 @@
         android:layout_height="56dp"
         android:layout_marginStart="50dp"
         android:layout_marginTop="44dp"
+        android:layout_marginEnd="87dp"
         android:ems="10"
-        android:inputType="text"
         android:hint="Ingrese un nombre de ususario"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
@@ -43,9 +47,11 @@
         android:layout_height="56dp"
         android:layout_marginStart="50dp"
         android:layout_marginTop="30dp"
+        android:layout_marginEnd="87dp"
         android:ems="10"
-        android:inputType="textEmailAddress"
         android:hint="ejemplo@gmail.com"
+        android:inputType="textEmailAddress"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editNombre_usuario" />
 
@@ -66,9 +72,11 @@
         android:layout_height="56dp"
         android:layout_marginStart="50dp"
         android:layout_marginTop="30dp"
+        android:layout_marginEnd="87dp"
         android:ems="10"
-        android:inputType="textPassword"
         android:hint="Ingrese contraseña"
+        android:inputType="textPassword"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editCorreo" />
 
@@ -88,9 +96,13 @@
         android:layout_height="60dp"
         android:layout_marginStart="60dp"
         android:layout_marginTop="111dp"
+        android:layout_marginEnd="53dp"
+        android:layout_marginBottom="82dp"
         android:backgroundTint="@color/verde_claro"
         android:text="Registrarse"
         android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnSalir"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editPassword" />
 
@@ -98,12 +110,16 @@
         android:id="@+id/btnSalir"
         android:layout_width="81dp"
         android:layout_height="56dp"
-        android:layout_marginStart="53dp"
+        android:layout_marginStart="25dp"
         android:layout_marginTop="111dp"
+        android:layout_marginEnd="69dp"
+        android:layout_marginBottom="86dp"
         android:background="@android:color/transparent"
         android:text="Salir"
         android:textColor="@color/black"
         android:textSize="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btnRegistro"
         app:layout_constraintTop_toBottomOf="@+id/editPassword" />
 
