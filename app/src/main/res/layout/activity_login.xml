@@ -23,7 +23,7 @@
         app:srcCompat="@drawable/harvesthub_logov2" />
 
     <EditText
-        android:id="@+id/editNombre_usuario"
+        android:id="@+id/editNombreusuario"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -38,7 +38,7 @@
         app:layout_constraintTop_toBottomOf="@+id/txtvUsuario" />
 
     <EditText
-        android:id="@+id/editPassword"
+        android:id="@+id/editPass"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -60,7 +60,7 @@
         android:layout_marginEnd="24dp"
         android:layout_marginTop="16dp"
         android:text="Usuario"
-        app:layout_constraintBottom_toTopOf="@+id/editNombre_usuario"
+        app:layout_constraintBottom_toTopOf="@+id/editNombreusuario"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2" />
@@ -73,10 +73,10 @@
         android:layout_marginEnd="24dp"
         android:layout_marginTop="16dp"
         android:text="Contraseña"
-        app:layout_constraintBottom_toTopOf="@+id/editPassword"
+        app:layout_constraintBottom_toTopOf="@+id/editPass"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editNombre_usuario" />
+        app:layout_constraintTop_toBottomOf="@+id/editNombreusuario" />
 
     <Button
         android:id="@+id/btnLogin"
@@ -108,7 +108,7 @@
         />
 
     <Button
-        android:id="@+id/btnSalir"
+        android:id="@+id/btnSalida"
         android:layout_width="0dp"
         android:layout_height="55dp"
         android:layout_marginTop="38dp"
@@ -129,7 +129,7 @@
         android:layout_marginTop="20dp"
         android:layout_marginStart="47dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editPassword" />
+        app:layout_constraintTop_toBottomOf="@+id/editPass" />
 
     <TextView
         android:id="@+id/txtvRecordarme"
@@ -142,6 +142,6 @@
         android:textColor="@color/black"
         android:textSize="18dp"
         app:layout_constraintStart_toEndOf="@+id/chipRecordar"
-        app:layout_constraintTop_toBottomOf="@+id/editPassword" />
+        app:layout_constraintTop_toBottomOf="@+id/editPass" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

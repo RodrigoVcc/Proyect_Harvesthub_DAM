@@ -1,7 +1,6 @@
 package com.example.proyectodamii;
 
-import android.content.Context;
-import android.content.SharedPreferences;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
@@ -15,7 +14,12 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.proyectodamii.databinding.ActivityRegistroBinding;
+
 public class Registro extends AppCompatActivity {
+
+    ActivityRegistroBinding enlacevistas;
+    daoUsuario dao;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,10 +31,13 @@ public class Registro extends AppCompatActivity {
             return insets;
         });
 
+        //sqlite
+        dao = new daoUsuario(this);
+
         //Registro elemntos
-        EditText editnombre_usuario = findViewById(R.id.editNombre_usuario);
-        EditText editpass = findViewById(R.id.editPassword);
-        EditText editemail = findViewById(R.id.editCorreo);
+        EditText editnombre = findViewById(R.id.editNombre_usuario);
+        EditText editcontrenia = findViewById(R.id.editPassword);
+        EditText editmail = findViewById(R.id.editCorreo);
         Button btnregistrar = findViewById(R.id.btnRegistro);
         Button btnsalir = findViewById(R.id.btnSalir);
 
@@ -39,9 +46,9 @@ public class Registro extends AppCompatActivity {
         btnregistrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String contrasenia = editpass.getText().toString();
-                String user = editnombre_usuario.getText().toString().trim();
-                String mail = editemail.getText().toString();
+                String contrasenia = editcontrenia.getText().toString().trim();
+                String user = editnombre.getText().toString().trim();
+                String mail = editmail.getText().toString().trim();
 
                 //validaciones
                 if(user.isEmpty()||mail.isEmpty()||contrasenia.isEmpty()){
@@ -57,14 +64,22 @@ public class Registro extends AppCompatActivity {
                     Toast.makeText(Registro.this, "La contraseña debe tener al menos 8 caracteres", Toast.LENGTH_SHORT).show();
                     return;
                 } else {
-                    SharedPreferences configuracion = getSharedPreferences("Registro_usuario", Context.MODE_PRIVATE);
+                    //crea un nuevo usuario en la base de datos
+                    Boolean verfNombreCorreo = dao.verfNombreCorreo(user,mail);
+                    if(verfNombreCorreo == false){
+                        Boolean insertar = dao.insertar(user,mail,contrasenia);
+                        if(insertar==true){
+                            Toast.makeText(Registro.this,"Usuario creado con exito", Toast.LENGTH_LONG).show();
+                            Intent intent= new Intent(Registro.this, MainActivity.class);
+                            startActivity(intent);
+                        }else{
+                            Toast.makeText(getApplication(),"Error al registrarse",Toast.LENGTH_SHORT).show();
+                        }
+                    }else{
+                        Toast.makeText(getApplication(),"Correo ya registrado",Toast.LENGTH_SHORT).show();
+                    }
 
-                    SharedPreferences.Editor editorpref = configuracion.edit();
-                    editorpref.putString(user,contrasenia);
-                    editorpref.apply();
-                    Toast.makeText(Registro.this,"Usuario creado con exito", Toast.LENGTH_LONG).show();
-                    
-                    finish();
+
                 }
 
 

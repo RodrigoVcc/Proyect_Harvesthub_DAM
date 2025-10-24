@@ -23,6 +23,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".Registro"/>
+        <activity android:name="com.example.proyectodamii.Home" />
     </application>
 
 </manifest>
