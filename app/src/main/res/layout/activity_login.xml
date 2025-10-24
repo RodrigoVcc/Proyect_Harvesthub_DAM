@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/login"
+    android:padding="16dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -10,10 +11,12 @@
     <ImageView
         android:id="@+id/imageView2"
         android:layout_width="220dp"
-        android:layout_height="156dp"
+        android:layout_height="135dp"
         android:layout_marginStart="100dp"
-        android:layout_marginTop="45dp"
+        android:layout_marginTop="40dp"
         android:layout_marginEnd="91dp"
+        android:layout_marginBottom="2dp"
+        app:layout_constraintBottom_toTopOf="@+id/txtvUsuario"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -21,44 +24,41 @@
 
     <EditText
         android:id="@+id/editNombre_usuario"
-        android:layout_width="274dp"
-        android:layout_height="56dp"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="77dp"
-        android:layout_marginBottom="9dp"
-        android:ems="10"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="24dp"
+        android:padding="12dp"
+        android:textSize="16sp"
         android:hint="Nombre Usuario"
         android:inputType="text"
-        app:layout_constraintBottom_toTopOf="@+id/txtvPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+        app:layout_constraintTop_toBottomOf="@+id/txtvUsuario" />
 
     <EditText
         android:id="@+id/editPassword"
-        android:layout_width="274dp"
-        android:layout_height="56dp"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="77dp"
-        android:layout_marginBottom="17dp"
-        android:ems="10"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="24dp"
+        android:padding="12dp"
+        android:textSize="16sp"
         android:hint="Ingrese contraseña"
         android:inputType="textPassword"
-        app:layout_constraintBottom_toTopOf="@+id/chip"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editNombre_usuario" />
+        app:layout_constraintTop_toBottomOf="@+id/txtvPassword" />
 
     <TextView
         android:id="@+id/txtvUsuario"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="2dp"
-        android:layout_marginEnd="303dp"
-        android:layout_marginBottom="1dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginTop="16dp"
         android:text="Usuario"
         app:layout_constraintBottom_toTopOf="@+id/editNombre_usuario"
         app:layout_constraintEnd_toEndOf="parent"
@@ -67,106 +67,81 @@
 
     <TextView
         android:id="@+id/txtvPassword"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="2dp"
-        android:layout_marginEnd="281dp"
-        android:layout_marginBottom="1dp"
-        android:text="contraseña"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginTop="16dp"
+        android:text="Contraseña"
         app:layout_constraintBottom_toTopOf="@+id/editPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editNombre_usuario" />
 
     <Button
-        android:id="@+id/btnRecuperarPass"
-        android:layout_width="264dp"
-        android:layout_height="56dp"
-        android:layout_marginStart="68dp"
-        android:layout_marginTop="75dp"
-        android:layout_marginEnd="79dp"
-        android:background="@android:color/transparent"
-        android:text="¿Has olvidado tu contraseña?"
-        android:textColor="@color/black"
-        android:textSize="15dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editPassword" />
-
-    <Button
-        android:id="@+id/btnlogin"
-        android:layout_width="275dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="68dp"
-        android:layout_marginTop="14dp"
-        android:layout_marginEnd="68dp"
-        android:layout_marginBottom="24dp"
+        android:id="@+id/btnLogin"
+        android:layout_width="0dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginStart="47dp"
+        android:layout_marginEnd="52dp"
         android:backgroundTint="@color/verde_claro"
         android:text="Inciar Sesion"
         android:textColor="@color/black"
-        app:layout_constraintBottom_toTopOf="@+id/btnSalie"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnRecuperarPass" />
-
-    <com.google.android.material.chip.Chip
-        android:id="@+id/chip"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="85dp"
-        android:layout_marginTop="17dp"
-        android:layout_marginEnd="19dp"
-        app:layout_constraintEnd_toStartOf="@+id/txtvRecordarme"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editPassword" />
-
-    <TextView
-        android:id="@+id/txtvRecordarme"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="19dp"
-        android:layout_marginTop="29dp"
-        android:layout_marginEnd="183dp"
-        android:text="Recuerdame"
-        android:textColor="@color/black"
-        android:textSize="18dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/chip"
-        app:layout_constraintTop_toBottomOf="@+id/editPassword" />
+        app:layout_constraintTop_toBottomOf="@+id/chipRecordar" />
 
     <Button
         android:id="@+id/btnRegistrar"
-        android:layout_width="164dp"
-        android:layout_height="56dp"
-        android:layout_marginStart="45dp"
-        android:layout_marginTop="25dp"
-        android:layout_marginEnd="53dp"
-        android:layout_marginBottom="38dp"
+        android:layout_width="0dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="38dp"
+        android:layout_marginStart="47dp"
         android:background="@android:color/transparent"
         android:text="Registrarse"
         android:textColor="@color/black"
         android:textSize="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btnSalie"
+        app:layout_constraintTop_toBottomOf="@+id/btnLogin"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnlogin" />
+        />
 
     <Button
-        android:id="@+id/btnSalie"
-        android:layout_width="81dp"
-        android:layout_height="56dp"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="25dp"
-        android:layout_marginEnd="80dp"
-        android:layout_marginBottom="50dp"
+        android:id="@+id/btnSalir"
+        android:layout_width="0dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="38dp"
+        android:layout_marginEnd="62dp"
         android:background="@android:color/transparent"
         android:text="Salir"
         android:textColor="@color/black"
         android:textSize="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/btnRegistrar"
-        app:layout_constraintTop_toBottomOf="@+id/btnlogin" />
+        app:layout_constraintTop_toBottomOf="@+id/btnLogin" />
+
+    <com.google.android.material.chip.Chip
+        android:id="@+id/chipRecordar"
+        style="@style/chip_estilo"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="47dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editPassword" />
+
+    <TextView
+        android:id="@+id/txtvRecordarme"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="30dp"
+        android:text="Recuerdame"
+        android:textColor="@color/black"
+        android:textSize="18dp"
+        app:layout_constraintStart_toEndOf="@+id/chipRecordar"
+        app:layout_constraintTop_toBottomOf="@+id/editPassword" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
