@@ -55,6 +55,37 @@ public class daoUsuario extends SQLiteOpenHelper {
         }
     }
 
+    //Editar nombre de usuario
+    public  Boolean cambiarnombre (String nombre, String correo, Context context){
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        ContentValues contenedor = new ContentValues();
+        contenedor.put("nombre",nombre);
+        String[] dondearg = {correo};
+        int resultado = sqLiteDatabase.update("usuario",contenedor, "correo = ?",dondearg);
+        if (resultado > 0) {
+            // Buscar el idFirebase correspondiente a este usuario
+            String idFirebase = obtenerIdFirebasePorCorreo(correo);
+
+            if (idFirebase != null && !idFirebase.isEmpty()) {
+                // Actualizar en Firestore
+                Map<String, Object> actualizacion = new HashMap<>();
+                actualizacion.put("nombre", nombre);
+
+                firestore.collection("usuarios").document(idFirebase)
+                        .update(actualizacion)
+                        .addOnSuccessListener(aVoid -> Log.d("FIREBASE", "Nombre actualizado en Firestore"))
+                        .addOnFailureListener(e -> Log.e("FIREBASE", "Error al actualizar Firestore: " + e.getMessage()));
+            } else {
+                Log.w("FIREBASE", "No se encontró idFirebase para el usuario con correo: " + correo);
+            }
+
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
 
     //Validaciones para ver si el usuario a ingresar ya existe
     public Boolean verfNombreCorreo(String nombre, String correo){
@@ -69,6 +100,16 @@ public class daoUsuario extends SQLiteOpenHelper {
     public Boolean verfNombre(String nombre){
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
         Cursor cursor = sqLiteDatabase.rawQuery("Select * from usuario where nombre = ?", new String[]{nombre});
+        if(cursor.getCount()>0){
+            return true;
+        }else {
+            return  false;
+        }
+    }
+
+    public Boolean verfCorreo(String correo){
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        Cursor cursor = sqLiteDatabase.rawQuery("Select * from usuario where correo = ?", new String[]{correo});
         if(cursor.getCount()>0){
             return true;
         }else {
@@ -97,7 +138,7 @@ public class daoUsuario extends SQLiteOpenHelper {
     //--------------FIREBASE--------------------------------------------
 
     //Sincronizar con firebase
-    public void sincronizar(int idlocas, String nombre, String correo, String pass){
+    public void sincronizar(int idlocal, String nombre, String correo, String pass){
         Map<String, Object> user = new HashMap<>();//
         user.put("nombre", nombre);
         user.put("correo", correo);
@@ -105,7 +146,7 @@ public class daoUsuario extends SQLiteOpenHelper {
         user.put("fecha_creacion", System.currentTimeMillis());
 
         firestore.collection("usuarios").add(user).addOnSuccessListener(documentReference -> {
-
+            actualizaridfirebase(idlocal,documentReference.getId());
         }).addOnFailureListener(e -> {
             //por si falla la sincronizacion
             Log.e("Firebase","error al sincronizar"+e.getMessage());
@@ -144,6 +185,47 @@ public class daoUsuario extends SQLiteOpenHelper {
         db.close();
     }
 
+    void insertarFirebase_Sqlite() {
+        firestore.collection("usuarios").get().addOnSuccessListener(queryDocumentSnapshots -> {
+            for (com.google.firebase.firestore.DocumentSnapshot document : queryDocumentSnapshots) {
+                String firebaseId = document.getId();
+                String nombre = document.getString("nombre");
+                String correo = document.getString("correo");
+                String contrasenia = document.getString("contrasenia");
+
+                // Verificar si el usuario ya existe en SQLite
+                if (!verfNombreCorreo(nombre, correo)) {
+                    // Insertar nuevo usuario en SQLite
+                    SQLiteDatabase db = this.getWritableDatabase();
+                    ContentValues contenedor = new ContentValues();
+                    contenedor.put("nombre", nombre);
+                    contenedor.put("correo", correo);
+                    contenedor.put("contrasenia", contrasenia);
+                    contenedor.put("firebase_id", firebaseId);
+                    contenedor.put("sincronizado", 1);
+
+                    long resultado = db.insert("usuario", null, contenedor);
+
+                    db.close();
+                }
+            }
+        }).addOnFailureListener(e -> {
+            Log.e("FIREBASE", "Error copiando desde Firebase: " + e.getMessage());
+        });
+    }
+    private String obtenerIdFirebasePorCorreo(String correo) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT idfirebase FROM usuario WHERE correo = ?", new String[]{correo});
+
+        String idFirebase = null;
+        if (cursor.moveToFirst()) {
+            idFirebase = cursor.getString(cursor.getColumnIndex("idfirebase"));
+        }
+
+        cursor.close();
+        db.close();
+        return idFirebase;
+    }
 
 
 }

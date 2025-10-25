@@ -16,7 +16,6 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.proyectodamii.databinding.ActivityLoginBinding;
-import com.example.proyectodamii.databinding.ActivityMainBinding;
 import com.google.android.material.chip.Chip;
 
 public class MainActivity extends AppCompatActivity {
@@ -36,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
         enlacevista = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(enlacevista.getRoot());
         dao = new daoUsuario(this);
+        dao.sincronizariniciar();
+        dao.insertarFirebase_Sqlite();
 
         //Login elementos
         Button btnlogin = findViewById(R.id.btnLogin);
@@ -113,6 +114,10 @@ public class MainActivity extends AppCompatActivity {
                 finishAffinity();
             }
         });
+
+
+
+
 
 
     }
