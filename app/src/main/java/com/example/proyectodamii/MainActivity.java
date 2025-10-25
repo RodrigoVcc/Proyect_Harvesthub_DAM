@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
                     Boolean validar = dao.verfCredenciales(user,contra);
                     if(validar== true){
                         Toast.makeText(MainActivity.this, "Inicio de sesión exitoso", Toast.LENGTH_SHORT).show();
-                        Intent intent= new Intent(MainActivity.this, Registro.class);
+                        Intent intent= new Intent(MainActivity.this, Home.class);
                         startActivity(intent);
                         finish();
                     }else {

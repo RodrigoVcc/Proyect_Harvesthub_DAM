@@ -70,6 +70,11 @@ public class Registro extends AppCompatActivity {
                         Boolean insertar = dao.insertar(user,mail,contrasenia);
                         if(insertar==true){
                             Toast.makeText(Registro.this,"Usuario creado con exito", Toast.LENGTH_LONG).show();
+
+                            //guardado en firestore
+
+
+
                             Intent intent= new Intent(Registro.this, MainActivity.class);
                             startActivity(intent);
                         }else{
