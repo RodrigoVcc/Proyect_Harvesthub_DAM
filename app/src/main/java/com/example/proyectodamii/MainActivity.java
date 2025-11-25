@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,6 +17,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.proyectodamii.databinding.ActivityLoginBinding;
+import com.example.proyectodamii.db.daoUsuario;
 import com.google.android.material.chip.Chip;
 
 public class MainActivity extends AppCompatActivity {
@@ -36,13 +38,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(enlacevista.getRoot());
         dao = new daoUsuario(this);
         dao.sincronizariniciar();
-        dao.insertarFirebase_Sqlite();
+        dao.insertar_usuarioFirebase_a_sqlite(this);
 
         //Login elementos
         Button btnlogin = findViewById(R.id.btnLogin);
         Button btnregistrologin = findViewById(R.id.btnRegistrar);
         Chip chprecordar = findViewById(R.id.chipRecordar);
-        EditText editnombre_usuario = findViewById(R.id.editNombreusuario);
+        EditText correo_usuario = findViewById(R.id.editCorreousuario);
         EditText editpass = findViewById(R.id.editPass);
         Button btnsalir = findViewById(R.id.btnSalida);
 
@@ -55,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
         boolean recordar = configuracion.getBoolean("recordar",false);
 
         if(recordar){
-            editnombre_usuario.setText(guardarusuario);
+            correo_usuario.setText(guardarusuario);
             editpass.setText(guardarpass);
             chprecordar.setChecked(true);
         }
@@ -66,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
         btnlogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String user=  enlacevista.editNombreusuario.getText().toString();
+                String user=  enlacevista.editCorreousuario.getText().toString();
                 String contra = enlacevista.editPass.getText().toString();
 
                 //Verifica si los datos estan en sharedpreferences para el boton chip
@@ -82,19 +84,26 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 //validacion de usuario
-
                     Boolean validar = dao.verfCredenciales(user,contra);
                     if(validar== true){
-                        Toast.makeText(MainActivity.this, "Inicio de sesión exitoso", Toast.LENGTH_SHORT).show();
-                        Intent intent= new Intent(MainActivity.this, Home.class);
-                        startActivity(intent);
-                        finish();
+                            Toast.makeText(MainActivity.this, "Inicio de sesión exitoso", Toast.LENGTH_SHORT).show();
+                            Intent intent= new Intent(MainActivity.this, Inicio.class);
+                            startActivity(intent);
+                            finish();
+
+
                     }else {
                         Toast.makeText(MainActivity.this, "Usuario o contraseña incorrectos sql", Toast.LENGTH_SHORT).show();
+                        Log.d("LOGIN", "Contraseña ingresada: " + contra);
+                       // Log.d("LOGIN", "Hash almacenado: " + contra_crypt);
+                       Log.d("LOGIN", "Resultado verificación: " + dao.verfCredenciales(user, contra));
                     }
 
             }
         });
+
+        //Restaurar contrasenia
+
 
         //Cambio de layout
         btnregistrologin.setOnClickListener(new View.OnClickListener() {

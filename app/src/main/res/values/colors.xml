@@ -5,4 +5,6 @@
     <color name="verde_claro">#C5E11A</color>
     <color name="verde_menu">#74CF40</color>
     <color name="verde_checked">#ADDA93</color>
+    <color name="rojo">#Ff0000</color>
+    <color name="verde_oscuro">#2B6A0B</color>
 </resources>

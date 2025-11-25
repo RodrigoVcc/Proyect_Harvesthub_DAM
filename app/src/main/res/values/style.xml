@@ -3,4 +3,9 @@
     <style name="chip_estilo" parent="Widget.Material3.Chip.Filter">
         <item name="chipBackgroundColor">@color/chip_fondo</item>
     </style>
+    <style name="indicador" parent="">
+        <item name="android:color">@color/rojo</item> <!-- color de fondo -->
+
+    </style>
+
 </resources>

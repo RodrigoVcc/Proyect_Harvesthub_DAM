@@ -1,18 +1,16 @@
 package com.example.proyectodamii;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.example.proyectodamii.db.daoUsuario;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class Ajustes extends AppCompatActivity {
@@ -73,10 +71,11 @@ public class Ajustes extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.toolbar_menu, menu);
+        getMenuInflater().inflate(R.menu.menu_navbar, menu);
         return true;
     }
 
+    /*
     // Manejar clics en los ítems del menú
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -87,13 +86,12 @@ public class Ajustes extends AppCompatActivity {
             startActivity(intent);
             return true;
         } else if (id == R.id.mapas) {
-            Intent intent= new Intent(Ajustes.this, Mapa.class);
-            startActivity(intent);
-            return true;
-        }
+        Intent intent= new Intent(Ajustes.this, Mapa.class);
+        startActivity(intent);
+        return true;
 
         return super.onOptionsItemSelected(item);
-    }
+    }*/
 
 
 

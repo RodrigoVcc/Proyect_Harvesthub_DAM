@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+
+    <data>
+        <variable
+            name="correo"
+            type="String" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".Inicio">
+
+
+        <TextView
+            android:id="@+id/txView1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="50dp"
+            android:text="¿Desea eliminar su cuenta?"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/txView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:textColor="#808080"
+            android:text="¿Está seguro que desea eliminar su cuenta vinculada al correo:"
+            app:layout_constraintStart_toStartOf="@+id/txView1"
+            app:layout_constraintEnd_toEndOf="@+id/txView1"
+            app:layout_constraintTop_toBottomOf="@id/txView1" />
+
+        <TextView
+            android:id="@+id/correoTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{correo}"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="@+id/txView"
+            app:layout_constraintTop_toBottomOf="@id/txView"
+            tools:text="correo@ejemplo.com" />
+
+        <TextView
+            android:id="@+id/textoAdvertencia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Este proceso es irreversible"
+            android:textColor="#808080"
+            app:layout_constraintStart_toStartOf="@+id/txView"
+            app:layout_constraintTop_toBottomOf="@id/correoTxt" />
+
+        <CheckBox
+            android:id="@+id/checkBox"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Estoy seguro que perderé todo acceso a esta aplicacion"
+            app:layout_constraintStart_toStartOf="@+id/textoAdvertencia"
+            app:layout_constraintTop_toBottomOf="@id/textoAdvertencia" />
+
+        <Button
+            android:id="@+id/btnConfirmar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="Eliminar cuenta"
+            android:backgroundTint="@color/rojo"
+            app:layout_constraintStart_toStartOf="@+id/checkBox"
+            app:layout_constraintTop_toBottomOf="@id/checkBox" />
+
+        <Button
+            android:id="@+id/btnCancelar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="30dp"
+            android:text="Cancelar"
+            android:textColor="@color/black"
+            android:background="@android:color/transparent"
+            app:layout_constraintStart_toEndOf="@+id/btnConfirmar"
+            app:layout_constraintTop_toBottomOf="@+id/checkBox" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

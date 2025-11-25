@@ -13,17 +13,17 @@
         android:layout_width="220dp"
         android:layout_height="135dp"
         android:layout_marginStart="100dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="60dp"
         android:layout_marginEnd="91dp"
         android:layout_marginBottom="2dp"
-        app:layout_constraintBottom_toTopOf="@+id/txtvUsuario"
+        app:layout_constraintBottom_toTopOf="@+id/txtvUsuario_mail"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/harvesthub_logov2" />
 
     <EditText
-        android:id="@+id/editNombreusuario"
+        android:id="@+id/editCorreousuario"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -31,11 +31,11 @@
         android:layout_marginEnd="24dp"
         android:padding="12dp"
         android:textSize="16sp"
-        android:hint="Nombre Usuario"
+        android:hint="ejemplo@ejemplo.com"
         android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtvUsuario" />
+        app:layout_constraintTop_toBottomOf="@+id/txtvUsuario_mail" />
 
     <EditText
         android:id="@+id/editPass"
@@ -53,13 +53,13 @@
         app:layout_constraintTop_toBottomOf="@+id/txtvPassword" />
 
     <TextView
-        android:id="@+id/txtvUsuario"
+        android:id="@+id/txtvUsuario_mail"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
         android:layout_marginTop="16dp"
-        android:text="Usuario"
+        android:text="Correo electronico"
         app:layout_constraintBottom_toTopOf="@+id/editNombreusuario"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -76,13 +76,13 @@
         app:layout_constraintBottom_toTopOf="@+id/editPass"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editNombreusuario" />
+        app:layout_constraintTop_toBottomOf="@+id/editCorreousuario" />
 
     <Button
         android:id="@+id/btnLogin"
         android:layout_width="0dp"
         android:layout_height="55dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="15dp"
         android:layout_marginStart="47dp"
         android:layout_marginEnd="52dp"
         android:backgroundTint="@color/verde_claro"
@@ -96,7 +96,7 @@
         android:id="@+id/btnRegistrar"
         android:layout_width="0dp"
         android:layout_height="55dp"
-        android:layout_marginTop="38dp"
+        android:layout_marginTop="10dp"
         android:layout_marginStart="47dp"
         android:background="@android:color/transparent"
         android:text="Registrarse"
@@ -111,7 +111,7 @@
         android:id="@+id/btnSalida"
         android:layout_width="0dp"
         android:layout_height="55dp"
-        android:layout_marginTop="38dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="62dp"
         android:background="@android:color/transparent"
         android:text="Salir"
@@ -143,5 +143,7 @@
         android:textSize="18dp"
         app:layout_constraintStart_toEndOf="@+id/chipRecordar"
         app:layout_constraintTop_toBottomOf="@+id/editPass" />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

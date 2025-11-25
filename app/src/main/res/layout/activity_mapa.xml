@@ -14,7 +14,11 @@
         android:layout_height="75dp"
         android:background="@color/verde_menu"
         android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme" >
+        android:theme="?attr/actionBarTheme"
+        android:paddingTop="30dp"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp">
+
         <TextView
             android:id="@+id/toolbar_nombre"
             android:layout_width="wrap_content"

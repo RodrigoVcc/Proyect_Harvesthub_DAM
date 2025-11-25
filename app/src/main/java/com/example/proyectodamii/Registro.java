@@ -15,6 +15,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.proyectodamii.databinding.ActivityRegistroBinding;
+import com.example.proyectodamii.db.daoUsuario;
 
 public class Registro extends AppCompatActivity {
 
@@ -64,25 +65,29 @@ public class Registro extends AppCompatActivity {
                     Toast.makeText(Registro.this, "La contraseña debe tener al menos 8 caracteres", Toast.LENGTH_SHORT).show();
                     return;
                 } else {
-                    //crea un nuevo usuario en la base de datos
-                    Boolean verfNombreCorreo = dao.verfNombreCorreo(user,mail);
-                    if(verfNombreCorreo == false){
-                        Boolean insertar = dao.insertar(user,mail,contrasenia);
-                        if(insertar==true){
-                            Toast.makeText(Registro.this,"Usuario creado con exito", Toast.LENGTH_LONG).show();
+                    //Valida el correo
+                    dao.verfCorreo_en_firebase(mail,existe ->{
+                        if (existe) {
+                            Toast.makeText(Registro.this, "El correo ya está registrado", Toast.LENGTH_SHORT).show();
+                        } else {
+                            //crea un nuevo usuario en la base de datos
+                            Boolean verfNombreCorreo = dao.verfNombreCorreo(user,mail);
+                            if(verfNombreCorreo == false){
+                                Boolean insertar = dao.insertar(user,mail,contrasenia);
+                                if(insertar==true){
+                                    Toast.makeText(Registro.this,"Usuario creado con exito", Toast.LENGTH_LONG).show();
 
-                            //guardado en firestore
-
-
-
-                            Intent intent= new Intent(Registro.this, MainActivity.class);
-                            startActivity(intent);
-                        }else{
-                            Toast.makeText(getApplication(),"Error al registrarse",Toast.LENGTH_SHORT).show();
+                                    Intent intent= new Intent(Registro.this, MainActivity.class);
+                                    startActivity(intent);
+                                }else{
+                                    Toast.makeText(getApplication(),"Error al registrarse",Toast.LENGTH_SHORT).show();
+                                }
+                            }else{
+                                Toast.makeText(getApplication(),"Correo ya registrado",Toast.LENGTH_SHORT).show();
+                            }
                         }
-                    }else{
-                        Toast.makeText(getApplication(),"Correo ya registrado",Toast.LENGTH_SHORT).show();
-                    }
+                    });
+
 
 
                 }

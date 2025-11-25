@@ -34,7 +34,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".Registro"/>
-        <activity android:name=".Home"/>
+        <activity android:name=".Inicio"/>
         <activity android:name=".Ajustes"/>
         <activity android:name="com.example.proyectodamii.Mapa" />
     </application>

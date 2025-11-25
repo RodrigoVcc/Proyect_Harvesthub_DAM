@@ -1,4 +1,4 @@
-package com.example.proyectodamii;
+package com.example.proyectodamii.db;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -14,6 +14,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.HashMap;
 import java.util.Map;
 
+import at.favre.lib.crypto.bcrypt.BCrypt;
+
 
 public class daoUsuario extends SQLiteOpenHelper {
     public static final String nombreBD="Usuarios.db";
@@ -23,9 +25,12 @@ public class daoUsuario extends SQLiteOpenHelper {
 
     public daoUsuario(@Nullable Context context) {
         super(context, "Usuarios.db", null, 1);
-        //Iniciar firestore
+        //Inicia firestore
         firestore = FirebaseFirestore.getInstance();
     }
+
+
+    //-----------------SQL------------------------------------
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
@@ -44,13 +49,18 @@ public class daoUsuario extends SQLiteOpenHelper {
         ContentValues contenedor = new ContentValues();
         contenedor.put("nombre",nombre);
         contenedor.put("correo",correo);
-        contenedor.put("contrasenia",pass);
+
+        //Encriptacion desde la bd
+        String encryptado = daoUsuario.encrypt_pass(pass);
+        contenedor.put("contrasenia",encryptado);
         long resultado = sqLiteDatabase.insert("usuario",null,contenedor);
         if(resultado == -1){
             return false;
         }else {
             //Sincronizacion con firebase
-            sincronizar((int) resultado,nombre,correo,pass);
+            if(!verfCorreo(correo)){
+                sincronizar((int) resultado,nombre,correo,encryptado);
+            }
             return true;
         }
     }
@@ -110,6 +120,7 @@ public class daoUsuario extends SQLiteOpenHelper {
     public Boolean verfCorreo(String correo){
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
         Cursor cursor = sqLiteDatabase.rawQuery("Select * from usuario where correo = ?", new String[]{correo});
+
         if(cursor.getCount()>0){
             return true;
         }else {
@@ -117,14 +128,26 @@ public class daoUsuario extends SQLiteOpenHelper {
         }
     }
 
-    public Boolean verfCredenciales(String nombre, String contrasenia){
+    public Boolean verfCredenciales(String correo, String contrasenia){
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
-        Cursor cursor = sqLiteDatabase.rawQuery("Select * from usuario where nombre = ? and contrasenia = ?", new String[]{nombre, contrasenia});
-        if(cursor.getCount()>0){
-            return true;
-        }else {
-            return  false;
+        Cursor cursor = sqLiteDatabase.rawQuery("Select * from usuario where correo = ? ", new String[]{correo});
+        boolean resultado = false;
+
+        if (cursor != null && cursor.moveToFirst()) {
+            // Obteniene la contraseña cifrada
+            String crypt_pass = cursor.getString(cursor.getColumnIndexOrThrow("contrasenia"));
+
+            // Compara las contrasenias (la ingresada con la cifrada)
+            boolean verificar = daoUsuario.verficar_pass(contrasenia, crypt_pass);
+
+            // Si coincide devuelve un true
+            resultado = verificar;
         }
+
+        cursor.close();
+        sqLiteDatabase.close();
+        return resultado;
+
     }
     public Boolean verfNombreCorreoContra(String nombre, String correo, String contrasenia){
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
@@ -139,18 +162,42 @@ public class daoUsuario extends SQLiteOpenHelper {
 
     //Sincronizar con firebase
     public void sincronizar(int idlocal, String nombre, String correo, String pass){
-        Map<String, Object> user = new HashMap<>();//
+        Map<String, Object> user = new HashMap<>();
         user.put("nombre", nombre);
         user.put("correo", correo);
         user.put("contrasenia", pass);
         user.put("fecha_creacion", System.currentTimeMillis());
 
-        firestore.collection("usuarios").add(user).addOnSuccessListener(documentReference -> {
-            actualizaridfirebase(idlocal,documentReference.getId());
-        }).addOnFailureListener(e -> {
-            //por si falla la sincronizacion
-            Log.e("Firebase","error al sincronizar"+e.getMessage());
-        });
+        firestore.collection("usuarios").document(correo)
+                .get()
+                .addOnSuccessListener(documentSnapshot -> {
+                    if (documentSnapshot.exists()) {
+                        // El correo ya existe en Firestore
+                        Log.w("SYNC", "Este correo ya existe. No se reemplazará.");
+                    } else {
+                        // El correo no existe, se puede crear
+                        firestore.collection("usuarios").document(correo)
+                                .set(user)
+                                .addOnSuccessListener(aVoid -> actualizaridfirebase(idlocal, correo))
+                                .addOnFailureListener(e -> Log.e("Firebase", "Error: " + e.getMessage()));
+                    }
+                }).addOnFailureListener(e -> Log.e("Firebase", "Error al verificar correo: " + e.getMessage()));
+
+
+    }
+    //Verificar correo en firebase
+    public interface CorreoListener { //interfaz que consulta a firebase
+        void onResult(boolean existe);
+    }
+    public void  verfCorreo_en_firebase(String correo, CorreoListener correo_check){
+
+        firestore.collection("usuarios").document(correo)
+                .get()
+                .addOnSuccessListener(documentSnapshot -> {
+                        // Valida si el correo existe en Firestore
+                        boolean existe = documentSnapshot.exists();
+                    correo_check.onResult(existe);
+                }).addOnFailureListener(e -> Log.e("Firebase", "Error al verificar correo: " + e.getMessage()));
 
     }
 
@@ -168,7 +215,7 @@ public class daoUsuario extends SQLiteOpenHelper {
     //Sincronizar al entrar a la app
     public void sincronizariniciar(){
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM usuario WHERE sincronizado = 0",null);
+        Cursor cursor = db.rawQuery("SELECT * FROM usuario WHERE sincronizado = 0",null);//puntero que a apunta a la BD en sqlite
 
         if(cursor != null && cursor.moveToFirst()){
             do{
@@ -185,7 +232,7 @@ public class daoUsuario extends SQLiteOpenHelper {
         db.close();
     }
 
-    void insertarFirebase_Sqlite() {
+    public void insertarFirebase_Sqlite() {
         firestore.collection("usuarios").get().addOnSuccessListener(queryDocumentSnapshots -> {
             for (com.google.firebase.firestore.DocumentSnapshot document : queryDocumentSnapshots) {
                 String firebaseId = document.getId();
@@ -201,7 +248,7 @@ public class daoUsuario extends SQLiteOpenHelper {
                     contenedor.put("nombre", nombre);
                     contenedor.put("correo", correo);
                     contenedor.put("contrasenia", contrasenia);
-                    contenedor.put("firebase_id", firebaseId);
+                    contenedor.put("idfirebase", firebaseId);
                     contenedor.put("sincronizado", 1);
 
                     long resultado = db.insert("usuario", null, contenedor);
@@ -213,6 +260,8 @@ public class daoUsuario extends SQLiteOpenHelper {
             Log.e("FIREBASE", "Error copiando desde Firebase: " + e.getMessage());
         });
     }
+
+    //El correo de usuario es el identificador de cada usuario
     private String obtenerIdFirebasePorCorreo(String correo) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT idfirebase FROM usuario WHERE correo = ?", new String[]{correo});
@@ -228,4 +277,70 @@ public class daoUsuario extends SQLiteOpenHelper {
     }
 
 
+    //Actualiza la base de datos local en base a firebase
+    public void insertar_usuarioFirebase_a_sqlite(Context context) {
+        firestore.collection("usuarios")
+                .addSnapshotListener((snapshots, e) -> {
+                    if (e != null) {
+                        Log.e("FIREBASE", "Error escuchando cambios: " + e.getMessage());
+                        return;
+                    }
+
+                    if (snapshots == null) return;
+
+                    SQLiteDatabase db = this.getWritableDatabase();
+
+                    for (com.google.firebase.firestore.DocumentChange cambio : snapshots.getDocumentChanges()) {
+                        String firebaseId = cambio.getDocument().getId();
+                        String nombre = cambio.getDocument().getString("nombre");
+                        String correo = cambio.getDocument().getString("correo");
+                        String contrasenia = cambio.getDocument().getString("contrasenia");
+
+                        switch (cambio.getType()) {
+                            case ADDED:
+                            case MODIFIED:
+                                // Si el usuario no existe localmente se insertar a la base de datos
+                                if (!verfNombreCorreo(nombre, correo)) {
+                                    ContentValues contenedor = new ContentValues();
+                                    contenedor.put("nombre", nombre);
+                                    contenedor.put("correo", correo);
+                                    contenedor.put("contrasenia", contrasenia);
+                                    contenedor.put("idfirebase", firebaseId);
+                                    contenedor.put("sincronizado", 1);
+                                    db.insert("usuario", null, contenedor);
+                                } else {
+                                    // Si existe se actualizan sus datos
+                                    ContentValues update = new ContentValues();
+                                    update.put("nombre", nombre);
+                                    update.put("contrasenia", contrasenia);
+                                    db.update("usuario", update, "correo = ?", new String[]{correo});
+                                }
+                                break;
+
+                            case REMOVED:
+                                // Si el documento se elimina en Firebase se borrar de SQLite (mantiene un formato de base de datos)
+                                db.delete("usuario", "idfirebase = ?", new String[]{firebaseId});
+                                break;
+                        }
+                    }
+
+                    db.close();
+                });
+    }
+
+    //Encryptar contrasenia
+    public static String encrypt_pass(String pass){
+
+        return  BCrypt.withDefaults().hashToString(12, pass.toCharArray());
+    }
+
+    //Verifica la contrasenia encriptda
+    public static Boolean verficar_pass(String pass, String cryp_pass){
+        if (cryp_pass== null || pass==null){
+            return  false;
+        }
+
+        BCrypt.Result verificado = BCrypt.verifyer().verify(pass.toCharArray(),cryp_pass);
+        return verificado.verified;
+    }
 }
