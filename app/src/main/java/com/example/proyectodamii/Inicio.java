@@ -10,7 +10,9 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.proyectodamii.databinding.ActivityMainBinding;
 import com.example.proyectodamii.fragments.AjustesFragment;
+import com.example.proyectodamii.fragments.CarritoFragment;
 import com.example.proyectodamii.fragments.HomeFragment;
+import com.example.proyectodamii.fragments.NotificacionFragment;
 
 
 public class Inicio extends AppCompatActivity {
@@ -29,6 +31,10 @@ public class Inicio extends AppCompatActivity {
                 cambiarFragment(new AjustesFragment());
             }else if(item.getItemId()== R.id.home_id){
                 cambiarFragment(new HomeFragment());
+            }else if(item.getItemId()==R.id.carrito){
+                cambiarFragment(new CarritoFragment());
+            }else if(item.getItemId()==R.id.notify){
+                cambiarFragment(new NotificacionFragment());
             }
 
             return true;

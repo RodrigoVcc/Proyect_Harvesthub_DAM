@@ -15,7 +15,7 @@
         android:padding="16dp">
 
         <ImageView
-            android:id="@+id/item_id"
+            android:id="@+id/item_image"
             android:layout_width="142dp"
             android:layout_height="98dp"
             android:layout_alignParentStart="true"
@@ -24,7 +24,7 @@
             android:id="@+id/textTitulo_producto"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toEndOf="@+id/item_id"
+            android:layout_toEndOf="@+id/item_image"
             android:text="Producto"
             android:textSize="20sp"
             android:textStyle="bold"
@@ -33,24 +33,26 @@
             android:textColor="@android:color/black"/>
 
 
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="30dp"
-            android:layout_height="40dp"
+        <TextView
+            android:id="@+id/txtViewcant"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_below="@id/textTitulo_producto"
             android:layout_alignStart="@id/textTitulo_producto"
             android:layout_marginStart="139dp"
-            android:layout_marginTop="39dp"
-            card_view:srcCompat="@drawable/carrito" />
+            android:layout_marginTop="34dp"
+            android:text="0"
+            android:textSize="35sp"
+            android:gravity="center"/>
 
         <TextView
-            android:id="@+id/txvPrecio"
+            android:id="@+id/txtview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/textTitulo_producto"
             android:layout_marginStart="17dp"
             android:layout_marginTop="14dp"
-            android:layout_toEndOf="@+id/item_id"
+            android:layout_toEndOf="@+id/item_image"
             android:paddingLeft="5dp"
             android:text="Precio: $"
             android:textSize="16sp"
@@ -63,7 +65,7 @@
             android:layout_below="@+id/textTitulo_producto"
             android:layout_marginStart="15dp"
             android:layout_marginTop="15dp"
-            android:layout_toEndOf="@+id/txvPrecio"
+            android:layout_toEndOf="@+id/txtview"
             android:paddingLeft="5dp"
             android:text="00.0"
             android:textSize="16sp"
@@ -74,7 +76,7 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_below="@id/textTitulo_producto"
-            android:layout_alignStart="@id/txvPrecio"
+            android:layout_alignStart="@id/txtview"
             android:layout_marginStart="159dp"
             android:layout_marginTop="43dp"
             card_view:srcCompat="@drawable/agregar" />
@@ -83,7 +85,7 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_below="@id/textTitulo_producto"
-            android:layout_alignStart="@id/txvPrecio"
+            android:layout_alignStart="@id/txtview"
             android:layout_marginStart="90dp"
             android:layout_marginTop="43dp"
             card_view:srcCompat="@drawable/quitar" />
@@ -93,7 +95,7 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_below="@id/textTitulo_producto"
-            android:layout_alignStart="@id/txvPrecio"
+            android:layout_alignStart="@id/txtview"
             android:layout_marginStart="160dp"
             android:layout_marginTop="-36dp"
             card_view:srcCompat="@drawable/basura" />

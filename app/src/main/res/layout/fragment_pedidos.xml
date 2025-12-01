@@ -3,8 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".fragments.NotificacionFragment">
+    tools:context=".fragments.CarritoFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <LinearLayout
@@ -27,7 +26,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Notificaciones"
+                android:text="Pedidos"
                 android:textColor="@android:color/black"
                 android:textSize="20sp"
                 android:textStyle="bold" />
@@ -42,7 +41,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/rv_notificacion"/>
+            android:id="@+id/rv_pedidos"/>
 
     </LinearLayout>
 

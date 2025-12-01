@@ -35,7 +35,7 @@
         <TextView
             android:id="@+id/textDescrp"
             android:layout_width="167dp"
-            android:layout_height="123dp"
+            android:layout_height="wrap_content"
             android:layout_below="@id/textTitulo"
             android:layout_alignStart="@id/textTitulo"
             android:layout_marginStart="0dp"

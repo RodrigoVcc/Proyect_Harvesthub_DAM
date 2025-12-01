@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/item_pedidos"
+    android:layout_margin="12dp"
+    card_view:contentPadding="4dp">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="1dp">
+
+        <ImageView
+            android:id="@+id/item_image_pedido"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true" />
+        <TextView
+            android:id="@+id/textTitulo_producto_imagen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/item_image_pedido"
+            android:text="Producto"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"/>
+
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

@@ -80,18 +80,6 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        //rv = view.findViewById(R.id.rec);
-        /*
-        fuente_datos = new ArrayList<>();
-        fuente_datos.add("Hola");
-        fuente_datos.add("Mundo");
-        fuente_datos.add("Frutas");
-        linearLayoutManager = new LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false);
-        recycleAdapter = new RecycleAdapter_hijo(fuente_datos);
-        rv.setLayoutManager(linearLayoutManager);
-        rv.setAdapter(recycleAdapter);
-
-*/
 
         rv = view.findViewById(R.id.recycle_view_main);
         rv.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -115,13 +103,12 @@ public class HomeFragment extends Fragment {
 
 
 
-       // ChipGroup chips = view.findViewById(R.id.chipGroup);
 
 
 
     }
-    //adapter para items padre
 
+    //adapter para items padre
     class RecycleAdapter_padre extends RecyclerView.Adapter<RecycleAdapter_padre.padreHolder>{
         List<Categoria> data;//Inicia la lista
         //Constructor del adapter
@@ -190,10 +177,7 @@ public class HomeFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(@NonNull MiHolder holder, int position) {
-
             holder.textView.setText(data.get(position).getNombre());
-
-
         }
 
         @Override

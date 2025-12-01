@@ -102,6 +102,37 @@ public class AjustesFragment extends Fragment implements AdapterView.OnItemClick
 //Comportamiento de los items (TEMPORAL)
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-        Toast.makeText(requireContext(),"Item clikeado: "+position ,Toast.LENGTH_SHORT).show();
+        switch (position){
+            case 0:
+                // Abrir Fragment Perfil
+                Toast.makeText(requireContext(), "Ajustes cuenta", Toast.LENGTH_SHORT).show();
+                break;
+
+            case 1:
+                // Abrir Fragment Pedido
+                navigateTo(new PedidosFragment());
+                break;
+
+            case 2:
+                // Abrir Fragment Método de pago
+                Toast.makeText(requireContext(), "Metodos de pago", Toast.LENGTH_SHORT).show();
+                break;
+
+            case 3:
+                Toast.makeText(requireContext(), "Eliminar cuenta", Toast.LENGTH_SHORT).show();
+                break;
+
+            case 4:
+                Toast.makeText(requireContext(), "Cerrar sesión", Toast.LENGTH_SHORT).show();
+                break;
+        }
+    }
+    private void navigateTo(Fragment fragment){
+        requireActivity()
+                .getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.frameLayout, fragment)
+                .addToBackStack(null)
+                .commit();
     }
 }

@@ -50,7 +50,7 @@
                 android:layout_height="wrap_content"
                 android:text="Frutas"
                 android:checkable="true"
-                style="@style/chip_estilo"/>
+                app:chipBackgroundColor="@color/chip_fondo"/>
 
             <com.google.android.material.chip.Chip
                 android:layout_width="wrap_content"
