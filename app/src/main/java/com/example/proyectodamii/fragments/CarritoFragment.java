@@ -1,6 +1,7 @@
 package com.example.proyectodamii.fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -13,10 +14,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.proyectodamii.Checkout;
+import com.example.proyectodamii.Inicio;
+import com.example.proyectodamii.MainActivity;
+import com.example.proyectodamii.Metodo_Pago;
 import com.example.proyectodamii.R;
 
 
@@ -32,7 +38,6 @@ public class CarritoFragment extends Fragment {
     RecyclerView rv;
     ListView lv;
     ListaAdapter listaAdapter;
-    Producto_item productoItem;
     ArrayList<Producto_item> fuente_datos;
     RecycleAdapter_carrito recycleAdapter;
 
@@ -107,7 +112,25 @@ public class CarritoFragment extends Fragment {
         TextView total = view.findViewById(R.id.txvTotal_sum);
         total.setText("$ "+ suma);
 
+        //boton pagar
+        Button pago = view.findViewById(R.id.btnPagar);
+
+        pago.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent= new Intent(requireContext(), Checkout.class);
+                //Comparte el dato de suma con el nombre de total
+                intent.putExtra("total",suma);
+                startActivity(intent);
+            }
+        });
+
+
+
+
     }
+
+
 
     //funcion suma de total
     public double SumaTotal(ArrayList<Producto_item> dato){

@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.proyectodamii.R;
+import com.example.proyectodamii.db.daoPedidos;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -28,9 +29,9 @@ import java.util.List;
 public class PedidosFragment extends Fragment {
 
     RecyclerView rv;
-    LinearLayoutManager linearLayoutManager;
     ArrayList<Pedido_item> fuente_datos;
     RecycleAdapter_pedidos recycleAdapter;
+    daoPedidos daopedido;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -84,6 +85,9 @@ public class PedidosFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         rv = view.findViewById(R.id.rv_pedidos);
+        daopedido = new daoPedidos(requireContext());
+
+
         fuente_datos = new ArrayList<>();
         fuente_datos.add(new Pedido_item("Pedido",0.55,"2025/11/26", Arrays.asList(
                 new Item_imagen("Manzana",R.drawable.manzana), new Item_imagen("Arroz",R.drawable.arroz_libra)

@@ -1,5 +1,6 @@
 package com.example.proyectodamii.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -9,10 +10,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.proyectodamii.Inicio;
+import com.example.proyectodamii.MainActivity;
+import com.example.proyectodamii.Metodo_Pago;
 import com.example.proyectodamii.R;
 
 /**
@@ -68,6 +73,12 @@ public class AjustesFragment extends Fragment implements AdapterView.OnItemClick
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        ImageView modos = inflater.inflate(R.layout.fragment_ajustes, container, false).findViewById(R.id.modos_claro_oscuro);
+
+        modos.setOnClickListener(v -> {
+            modos.setImageResource(R.drawable.dia);
+        });
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_ajustes, container, false);
     }
@@ -97,6 +108,8 @@ public class AjustesFragment extends Fragment implements AdapterView.OnItemClick
         listView.setOnItemClickListener(this);
 
 
+
+
     }
 
 //Comportamiento de los items (TEMPORAL)
@@ -115,7 +128,8 @@ public class AjustesFragment extends Fragment implements AdapterView.OnItemClick
 
             case 2:
                 // Abrir Fragment Método de pago
-                Toast.makeText(requireContext(), "Metodos de pago", Toast.LENGTH_SHORT).show();
+                Intent intent= new Intent(requireActivity(), Metodo_Pago.class);
+                startActivity(intent);
                 break;
 
             case 3:

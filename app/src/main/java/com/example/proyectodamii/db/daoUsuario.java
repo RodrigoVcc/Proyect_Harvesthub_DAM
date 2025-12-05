@@ -18,7 +18,6 @@ import at.favre.lib.crypto.bcrypt.BCrypt;
 
 
 public class daoUsuario extends SQLiteOpenHelper {
-    public static final String nombreBD="Usuarios.db";
     FirebaseFirestore firestore;
 
 
@@ -40,7 +39,7 @@ public class daoUsuario extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
-        sqLiteDatabase.execSQL("drop Table if exists usuario");
+        sqLiteDatabase.execSQL("drop Table if exists usuario");//Se elimina la tabla cuando cambia de version
     }
 
     //Constructor de registros
@@ -66,7 +65,7 @@ public class daoUsuario extends SQLiteOpenHelper {
     }
 
     //Editar nombre de usuario
-    public  Boolean cambiarnombre (String nombre, String correo, Context context){
+    public  Boolean cambiarnombre (String nombre, String correo){
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         ContentValues contenedor = new ContentValues();
         contenedor.put("nombre",nombre);
@@ -162,7 +161,7 @@ public class daoUsuario extends SQLiteOpenHelper {
 
     //Sincronizar con firebase
     public void sincronizar(int idlocal, String nombre, String correo, String pass){
-        Map<String, Object> user = new HashMap<>();
+        Map<String, Object> user = new HashMap<>();//diccionario con la data a enviar
         user.put("nombre", nombre);
         user.put("correo", correo);
         user.put("contrasenia", pass);
@@ -232,34 +231,6 @@ public class daoUsuario extends SQLiteOpenHelper {
         db.close();
     }
 
-    public void insertarFirebase_Sqlite() {
-        firestore.collection("usuarios").get().addOnSuccessListener(queryDocumentSnapshots -> {
-            for (com.google.firebase.firestore.DocumentSnapshot document : queryDocumentSnapshots) {
-                String firebaseId = document.getId();
-                String nombre = document.getString("nombre");
-                String correo = document.getString("correo");
-                String contrasenia = document.getString("contrasenia");
-
-                // Verificar si el usuario ya existe en SQLite
-                if (!verfNombreCorreo(nombre, correo)) {
-                    // Insertar nuevo usuario en SQLite
-                    SQLiteDatabase db = this.getWritableDatabase();
-                    ContentValues contenedor = new ContentValues();
-                    contenedor.put("nombre", nombre);
-                    contenedor.put("correo", correo);
-                    contenedor.put("contrasenia", contrasenia);
-                    contenedor.put("idfirebase", firebaseId);
-                    contenedor.put("sincronizado", 1);
-
-                    long resultado = db.insert("usuario", null, contenedor);
-
-                    db.close();
-                }
-            }
-        }).addOnFailureListener(e -> {
-            Log.e("FIREBASE", "Error copiando desde Firebase: " + e.getMessage());
-        });
-    }
 
     //El correo de usuario es el identificador de cada usuario
     private String obtenerIdFirebasePorCorreo(String correo) {

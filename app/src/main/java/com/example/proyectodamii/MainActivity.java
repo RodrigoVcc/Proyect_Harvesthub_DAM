@@ -17,13 +17,17 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.proyectodamii.databinding.ActivityLoginBinding;
+import com.example.proyectodamii.db.daoInventario;
 import com.example.proyectodamii.db.daoUsuario;
 import com.google.android.material.chip.Chip;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     ActivityLoginBinding enlacevista;
     daoUsuario dao;
+    daoInventario productos;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +43,31 @@ public class MainActivity extends AppCompatActivity {
         dao = new daoUsuario(this);
         dao.sincronizariniciar();
         dao.insertar_usuarioFirebase_a_sqlite(this);
+
+        productos = new daoInventario(this);
+
+        daoInventario.Producto producto = new daoInventario.Producto("Manzana", "Ricas manzanas", 0.25, 150, "Frutas", R.drawable.manzana);
+        long idInsertado = productos.agregarProducto(producto);
+
+// Obtener todos los productos
+        List<daoInventario.Producto> todosProductos = productos.obtenerTodosProductos();
+
+// Buscar productos
+        List<daoInventario.Producto> resultados = productos.buscarProductosPorNombre("lap");
+
+// Actualizar un producto
+        producto.setPrecio(1150.99);
+        boolean actualizado = productos.actualizarProducto(producto);
+
+// Eliminar un producto
+        boolean eliminado = productos.eliminarProducto(1);
+
+// Obtener productos por tipo
+        List<daoInventario.Producto> electronicos = productos.obtenerProductosPorTipo("Electrónica");
+
+
+
+
 
         //Login elementos
         Button btnlogin = findViewById(R.id.btnLogin);

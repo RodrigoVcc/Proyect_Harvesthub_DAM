@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.NotificacionFragment">
-
-    <!-- TODO: Update blank fragment layout -->
+    tools:context=".Metodo_Pago">
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -26,7 +26,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Notificaciones"
+                android:text="Metodo de Pago"
                 android:textColor="@android:color/black"
                 android:textSize="20sp"
                 android:textStyle="bold" />
@@ -37,12 +37,33 @@
                 android:layout_height="40dp"
                 android:src="@drawable/usuario" />
         </LinearLayout>
+        <ImageView
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="5dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:id="@+id/imvAtras"
+            android:src="@drawable/retroceder"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Metodos de pago Agregados"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginStart="55dp"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/rv_notificacion"/>
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:id="@+id/rv_metodos_pago"/>
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/agregar"
+            android:layout_gravity="center"/>
 
     </LinearLayout>
 
-</FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Direccion">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!-- HEADER -->
+        <LinearLayout
+            android:id="@+id/header"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:background="@color/verde_menu"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/txtNombre"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Direccion"
+                android:textColor="@android:color/black"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/modos_claro_oscuro"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:src="@drawable/noche"
+                android:layout_marginEnd="50dp"/>
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/avatar_usuario"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/usuario" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/imvAtras"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/retroceder"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Agregar direccion"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginStart="60dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Direccion de envio"
+            android:textSize="16sp"
+            android:layout_marginStart="80dp"
+            android:layout_marginTop="15dp"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:layout_marginEnd="50dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edtDireccion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Av. Independencia"/>
+        </com.google.android.material.textfield.TextInputLayout>
+        <fragment
+            android:id="@+id/mapa_main_direccion"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="375dp"
+            android:layout_marginTop="20dp"
+            android:layout_height="300dp"
+            android:layout_gravity="center"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <Button
+                android:id="@+id/btnCancelar_direccion"
+                android:layout_width="wrap_content"
+                android:layout_height="55dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginStart="50dp"
+                android:background="@android:color/transparent"
+                android:text="Cancelar"
+                android:textColor="@color/black"
+                android:textSize="15dp"
+                />
+
+            <Button
+                android:id="@+id/btnConfirmar_direccion"
+                android:layout_width="wrap_content"
+                android:layout_height="55dp"
+                android:layout_marginStart="47dp"
+                android:layout_marginTop="15dp"
+                android:layout_toEndOf="@+id/btnCancelar_direccion"
+                android:backgroundTint="@color/verde_claro"
+                android:text="Confirmar"
+                android:textColor="@color/black" />
+
+
+        </RelativeLayout>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

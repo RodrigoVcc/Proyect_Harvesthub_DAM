@@ -50,7 +50,7 @@ public class Ajustes extends AppCompatActivity {
                 }
                 boolean verfcorreo = dao.verfCorreo(correo);
                 if(verfcorreo){
-                    boolean exito = dao.cambiarnombre(nuevoNombre, correo, null);
+                    boolean exito = dao.cambiarnombre(nuevoNombre, correo);
 
                     if (exito) {
                         Toast.makeText(Ajustes.this, "Perfil actualizado correctamente", Toast.LENGTH_SHORT).show();

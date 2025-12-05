@@ -32,6 +32,12 @@
                 android:textColor="@android:color/black"
                 android:textSize="20sp"
                 android:textStyle="bold" />
+            <ImageView
+                android:id="@+id/modos_claro_oscuro"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:src="@drawable/noche"
+                android:layout_marginEnd="50dp"/>
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/avatar_usuario"

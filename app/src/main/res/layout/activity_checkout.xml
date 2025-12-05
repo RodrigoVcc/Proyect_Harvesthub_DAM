@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Checkout">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!-- HEADER -->
+        <LinearLayout
+            android:id="@+id/header"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:background="@color/verde_menu"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/txtNombre"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Pago"
+                android:textColor="@android:color/black"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/avatar_usuario"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/usuario" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="5dp">
+
+            <ImageView
+                android:id="@+id/imvAtras"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/retroceder"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Resumen de orden"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginStart="10dp"/>
+        </LinearLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtOrden"
+                android:text="Orden"
+                android:layout_marginStart="75dp"
+                android:textSize="18sp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/txvImpuesto"
+                android:text="Impuesto de apliacion"
+                android:layout_marginStart="75dp"
+                android:layout_marginTop="25dp"
+                android:textSize="18sp"/>
+            <TextView
+                android:id="@+id/txvOrden_total"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0.0"
+                android:textSize="18sp"
+                android:layout_toEndOf="@+id/txtOrden"
+                android:layout_marginStart="180dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0.15"
+                android:textSize="18sp"
+                android:id="@+id/txvImpuesto_total"
+                android:layout_toEndOf="@+id/txvImpuesto"
+                android:layout_below="@+id/txvOrden_total"
+                android:layout_marginStart="55dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Total"
+                android:id="@+id/txtotal"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="65dp"
+                android:textSize="20sp"/>
+            <TextView
+                android:id="@+id/txvTotal_sum_chk"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0.0"
+                android:layout_toEndOf="@+id/txtotal"
+                android:layout_below="@+id/txvImpuesto_total"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="230dp"
+                android:textSize="20sp"/>
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Metodos de pago Agregados"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginStart="55dp"/>
+        <RadioGroup
+            android:id="@+id/rbgTarjetas"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:id="@+id/rv_metodos_pago_checkout"/>
+
+        </RadioGroup>
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/agregar"
+            android:layout_gravity="center"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Direccion de Envio"
+            android:textSize="20sp"
+            android:layout_marginStart="55dp"
+            android:layout_marginTop="20dp"/>
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:layout_marginEnd="50dp"
+            android:id="@+id/icnDireccion"
+            app:endIconMode="custom"
+            app:endIconDrawable="@drawable/edit">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edtDireccion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Av. Independencia"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/btnPagar_ahora"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="50dp"
+            android:layout_marginBottom="50dp"
+            android:text="Pagar ahora"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:backgroundTint="@color/verde_menu"/>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

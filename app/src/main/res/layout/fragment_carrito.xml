@@ -54,7 +54,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="180dp"
                 android:padding="16dp"
-                android:backgroundTint="@color/verde_claro">
+                android:backgroundTint="#74CF40">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -99,7 +99,8 @@
                         android:layout_marginTop="15dp"
                         android:layout_below="@id/listaResumen"
                         android:layout_toEndOf="@+id/txvTotal"
-                        android:layout_marginLeft="180dp"/>
+                        android:layout_marginLeft="180dp"
+                        android:textStyle="bold"/>
 
                 </RelativeLayout>
 
@@ -108,7 +109,7 @@
         </RelativeLayout>
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/btnPagar"
             android:layout_width="wrap_content"
             android:layout_height="55dp"
             android:layout_gravity="center"
